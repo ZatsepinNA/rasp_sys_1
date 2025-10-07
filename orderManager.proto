@@ -1,0 +1,37 @@
+syntax = "proto3"
+package orderManager;
+
+service OrderService {
+  // Получить информацию о заказе
+  rpc GetOrder(OrderRequest) returns (OrderResponse) {}
+  
+  // Добавить новый заказ
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse) {}
+  
+  // Получить все заказы
+  rpc GetAllOrders(Empty) returns (stream OrderResponse) {}
+}
+// Пустой запрос для GetAllOrders
+message Empty {}
+// Запрос для получения заказа по ID
+message OrderRequest {
+  string order_id = 1;
+}
+// Запрос для создания заказа
+somessage CreateOrderRequest {
+  string product_name = 1;
+  int32 quantity = 2;
+  float price = 3;
+  string customer_name = 4;
+}
+// Ответ с информацией о заказе
+message OrderResponse {
+  string order_id = 1;
+  string product_name = 2;
+  int32 quantity = 3;
+  float price = 4;
+  string customer_name = 5;
+  string status = 6;
+  string created_at = 7;
+  float total_amount = 8;
+}
